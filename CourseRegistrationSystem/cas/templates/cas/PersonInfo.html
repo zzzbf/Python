@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}个人信息{% endblock %}
+
+{% block content %}
+<br />
+<br />
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">个人信息表</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class=" col-md-9 col-lg-9 ">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    {% if identity.isStudent %}
+                                        <tr>
+                                            <td>学号</td>
+                                            <td>{{ student.0 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>姓名</td>
+                                            <td>{{ student.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>性别</td>
+                                            <td>{{  student.2 }}</td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td>出生日期</td>
+                                            <td>{{  student.3 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>班级</td>
+                                            <td>{{  student.4 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>专业</td>
+                                            <td>{{  student.5 }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td>职工号</td>
+                                            <td>{{  teacher.0 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>姓名</td>
+                                            <td>{{  teacher.1 }}</td>
+                                        </tr>
+                                    {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

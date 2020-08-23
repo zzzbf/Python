@@ -1,0 +1,182 @@
+/*====黑线框表格=========*/
+.blacktab {
+    border: 1px solid #000;
+}
+
+    .blacktab th, .blacktab td {
+        border: 1px solid #000;
+        color: #000;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=====Start====通用数据类型表格样式=========*/
+.datelist {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2px auto;
+}
+
+    .datelist caption {
+        font-size: 100%;
+        font-weight: bold;
+        display: none;
+    }
+
+    .datelist thead th, .datelist thead td, .datelisthead td, .datelisthead td:hover {
+        padding: 0.2em 0.3em;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .datelist thead tr:hover {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .datelist th, .datelist td {
+        text-align: left;
+        padding: 0.2em 0.3em;
+        /*vertical-align: middle;*/
+    }
+
+    .datelist tbody td, .datelist tbody th {
+        border-bottom: 1px solid #ccc;
+        padding: 0.2em 0.5em;
+        /*vertical-align: middle;*/
+    }
+
+    .datelist td a, .datelist th a {
+        color: blue;
+    }
+
+    .datelist tr:hover {
+        cursor: default;
+    }
+
+    .datelist tr.alt {
+    }
+
+    .datelist tr.current {
+        cursor: default
+    }
+
+/*=====End====通用数据类型表格样式=========*/
+
+/*=====Start====通用表单类型表格样式=========*/
+.formlist, .opentable {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2px auto;
+    text-align: left;
+}
+
+    .formlist caption {
+        text-align: left;
+        font-weight: bold;
+        font-size: 120%;
+        display: none;
+    }
+
+    .formlist th, .formlist td, .opentable th, .opentable td {
+        padding: 0.5em 0.6em;
+        vertical-align: middle;
+    }
+
+    .formlist th, .opentable th {
+        text-align: right;
+    }
+
+    .formlist td:hover, .opentable td:hover {
+    }
+
+    .formlist label.heading {
+        margin-right: 6px;
+    }
+/*=====End====通用表单类型表格样式=========*/
+/*====黑线框表格=========*/
+.blacktab {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2px auto;
+}
+
+    .blacktab th, .blacktab td {
+        padding: 0.5em 0.6em;
+        vertical-align: middle;
+    }
+/*====红色表格=========*/
+.redtab {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2px auto;
+}
+
+    .redtab caption {
+        padding: 10px 0;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .redtab th, .redtab td {
+        padding: 1em 0.6em;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .redtab th {
+        text-align: right;
+    }
+
+    .redtab input {
+    }
+/*============表格换行等样式==============*/
+.nowrap td, .nowrap th {
+    white-space: nowrap; /*=该表格强制不换行=*/
+}
+
+.pre th, .pre th {
+    white-space: nowrap; /*=强制显示预先格式化的文本=*/
+}
+/*=========打印预览页面===========*/
+.printview {
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .printview h3 {
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+.printview_button {
+    padding: 5px 0;
+}
+
+.wordbreak {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+@charset "utf-8";
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}

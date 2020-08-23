@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}课程信息{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="panel-heading">
+        <div class="text-center">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h3 class="pull-left">{{ course.0 }}({{ course.2 }})</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        {% if course.3 == None%}
+        <script>alert("该课程暂无简介")</script>
+        {% else %}
+        {{ course.3 }}
+        {% endif %}
+    </div>
+
+    <div class="panel-footer">
+        <span class="label label-default">{{ course.1 }}</span>
+        <a href="{{request.META.HTTP_REFERER}}">返回</a>
+    </div>
+</div>
+{% endblock %}

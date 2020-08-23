@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}首页{% endblock %}
+
+{% block content %}
+
+<br />
+<form action="." method="GET">
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="搜索课程" name="q" />
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+
+<!-- 1是学生 -->
+{% if identity.isStudent %}
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>课程名称</td>
+                    <td>课程学分</td>
+                    <td>课程性质</td>
+                    <td>任课老师</td>
+                    <td>选课课号</td>
+                    <td>上课时间</td>
+                    <td>上课地点</td>
+                    <td>开课学院</td>
+                    <td>退选</td>
+                </tr>
+                {% for data in courses %}
+                <tr>
+                    {% for courseInfo in data %}
+                    <td>{{ courseInfo }}</td>
+                    {% endfor %}
+                    <td>
+                        <input class="form-check-input" type="checkbox" name="course" value="{{ data.4 }}" />
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+<!-- 2 是教师 -->
+{% elif identity.isTeacher %}
+
+    {% csrf_token %}
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>课程名称</td>
+                <td>课程学分</td>
+                <td>课程性质</td>
+                <td>任课老师</td>
+                <td>选课课号</td>
+                <td>上课时间</td>
+                <td>上课地点</td>
+                <td>开课学院</td>
+            </tr>
+            {% for data in courses %}
+            <tr>
+                {% for courseInfo in data %}
+                <td>{{ courseInfo }}</td>
+                {% endfor %}
+                <td><a href="{% url 'cas:studentScoreInsert' Ccode=data.4 %}">导入成绩</a></td>
+                <td><a href="{% url 'cas:makeUpExam' Ccode=data.4 %}">补考处理</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% endif %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if courses.has_previous %}
+        <!--a href="?page=1">&laquo; 第一页</a>-->
+        <a href="?page={{ courses.previous_page_number }}">上一页</a>
+        {% endif %}
+        <span class="current">
+            <!--Page {{ courses.number }} of {{ courses.paginator.num_pages }}.-->
+            {{ courses.number }}
+        </span>
+
+        {% if courses.has_next %}
+        <a href="?page={{ courses.next_page_number }}">下一页</a>
+        <!--<a href="?page={{ courses.paginator.num_pages }}">最后一页 &raquo;</a>-->
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

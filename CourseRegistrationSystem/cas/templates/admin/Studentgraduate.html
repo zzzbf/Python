@@ -1,0 +1,42 @@
+{% extends "admin/base_site.html" %}
+{% block extrastyle %}
+<script language="JavaScript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('student');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
+{% endblock %}
+{% block content %}
+<h3>满足毕业条件的学生</h3>
+<form action="." method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>班级</th>
+            <th>专业</th>
+            <th><input type="checkbox" onClick="toggle(this)" /></th>
+        </tr>
+        {% for student in Student_Graduated %}
+        <tr>
+            {% for info in student %}
+            <td>{{ info }}</td>
+            {% endfor %}
+            <td><input type="checkbox" value="{{ student.0 }}" name="student" /></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input type="submit" value="提交" /></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

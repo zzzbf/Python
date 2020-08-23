@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load tags %}
+{% block title %}查看课表{% endblock %}
+{% block head %}
+<link href="{% static 'cas/jw.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<table id="Table1" class="blacktab" border="0" style="border-color:Black;width:100%;">
+    <tbody>
+        <tr>
+            <td colspan="2" rowspan="1" style="width:2%;">时间</td>
+            <td align="center" style="width:14%;">星期一</td>
+            <td align="center" style="width:14%;">星期二</td>
+            <td align="center" style="width:14%;">星期三</td>
+            <td align="center" style="width:14%;">星期四</td>
+            <td align="center" style="width:14%;">星期五</td>
+            <td class="noprint" align="center" style="width:14%;">星期六</td>
+            <td class="noprint" align="center" style="width:14%;">星期日</td>
+        </tr>
+        <tr>
+            <td colspan="2">早晨</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td rowspan="5" style="width:1%;">上午</td>
+            <td style="width:1%;">第一节</td>
+            {% for i in count1 %}
+                {% if i in courses %}
+                    <td align="center" rowspan="{{ courses|get_section:i }}" style="width:7%;">
+                    {{ courses|get_name:i }}<br>{{ courses|get_time:i }}<br>{{ courses|get_teacher:i }}<br>{{ courses|get_position:i }}
+                    </td>
+                {% elif i < 5 %}
+                     <td align="center" style="width:7%;">&nbsp;</td>
+                {% else %}
+                     <td class="noprint" align="center" style="width:7%;">&nbsp;</td>
+                {% endif %}
+            {% endfor %}
+            
+        </tr>
+        <tr>
+            <td>第二节</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>第三节</td>
+
+            {% for i in count2 %}
+            {% if i in courses %}
+            <td align="center" rowspan="{{ courses|get_section:i }}" style="width:7%;">
+                {{ courses|get_name:i }}<br>{{ courses|get_time:i }}<br>{{ courses|get_teacher:i }}<br>{{ courses|get_position:i }}
+            </td>
+            {% elif i < 5 %}
+            <td align="center" style="width:7%;">&nbsp;</td>
+            {% else %}
+            <td class="noprint" align="center" style="width:7%;">&nbsp;</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>第四节</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>第五节</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td rowspan="4">下午</td>
+            <td>第六节</td>
+            {% for i in count3 %}
+            {% if i in courses %}
+            <td align="center" rowspan="{{ courses|get_section:i }}" style="width:7%;">
+                {{ courses|get_name:i }}<br>{{ courses|get_time:i }}<br>{{ courses|get_teacher:i }}<br>{{ courses|get_position:i }}
+            </td>
+            {% elif i < 5 %}
+            <td align="center" style="width:7%;">&nbsp;</td>
+            {% else %}
+            <td class="noprint" align="center" style="width:7%;">&nbsp;</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>第七节</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>第八节</td>
+            {% for i in count4 %}
+            {% if i in courses %}
+            <td align="center" rowspan="{{ courses|get_section:i }}" style="width:7%;">
+                {{ courses|get_name:i }}<br>{{ courses|get_time:i }}<br>{{ courses|get_teacher:i }}<br>{{ courses|get_position:i }}
+            </td>
+            {% elif i < 5 %}
+            <td align="center" style="width:7%;">&nbsp;</td>
+            {% else %}
+            <td class="noprint" align="center" style="width:7%;">&nbsp;</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>第九节</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td rowspan="3">晚上</td>
+            <td>第10节</td>
+            {% for i in count5 %}
+            {% if i in courses %}
+            <td align="center" rowspan="{{ courses|get_section:i }}" style="width:7%;">
+                {{ courses|get_name:i }}<br>{{ courses|get_time:i }}<br>{{ courses|get_teacher:i }}<br>{{ courses|get_position:i }}
+            </td>
+            {% elif i < 5 %}
+            <td align="center" style="width:7%;">&nbsp;</td>
+            {% else %}
+            <td class="noprint" align="center" style="width:7%;">&nbsp;</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>第11节</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>第12节</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+            <td class="noprint" align="center">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+    {% endblock %}

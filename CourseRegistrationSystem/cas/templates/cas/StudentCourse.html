@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}网上选课{% endblock %}
+{% block head %}
+{% if conflict %}
+<script>alert("课程冲突");</script>
+{% endif %}
+<script src="{% static 'cas/bootstrap.min.js' %}"></script>
+<script src="{% static 'cas/jquery-1.11.1.min.js' %}"></script>
+<script type="text/javascript">
+    window.alert = function () { };
+    var defaultCSS = document.getElementById('bootstrap-css');
+    function changeCSS(css) {
+        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+        else $('head > link').filter(':first').replaceWith(defaultCSS);
+    }
+    $(document).ready(function () {
+        var iframe_height = parseInt($('html').height());
+        window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
+    });
+</script>
+
+<style type="text/css">
+
+
+
+    .dropdown.dropdown-lg .dropdown-menu {
+        margin-top: -1px;
+        padding: 6px 20px;
+    }
+
+    .input-group-btn .btn-group {
+        display: flex !important;
+    }
+
+    .btn-group .btn {
+        border-radius: 0;
+        margin-left: -1px;
+    }
+
+        .btn-group .btn:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+    .btn-group .form-horizontal .btn[type="submit"] {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .form-horizontal .form-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .form-group .form-control:last-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    @media screen and (min-width: 768px) {
+        #adv-search {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .dropdown.dropdown-lg {
+            position: static !important;
+        }
+
+            .dropdown.dropdown-lg .dropdown-menu {
+                min-width: 500px;
+            }
+    }
+</style>
+
+{% endblock %}
+{% block content %}
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="搜索课程" name="Cname">
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form" action="{% url 'cas:search' %}" method="get">
+                                    <div class="form-group">
+                                        <label for="filter">课程性质</label>
+                                        <select class="form-control" name="option">
+                                            <option value="0">任意</option>
+                                            <option value="1">通识必修</option>
+                                            <option value="2">校定必修</option>
+                                            <option value="3">其它任选</option>
+                                            <option value="4">专业必修</option>
+                                            <option value="5">专业选修</option>
+                                            <option value="6">实践</option>
+                                            <option value="7">必修</option>
+                                            <option value="8">科技任选</option>
+                                            <option value="9">人文任选</option>
+                                            <option value="10">学科必修</option>
+                                            <option value="11">外语模块</option>
+                                            <option value="12">实践必修</option>
+                                            <option value="13">公共选修</option>
+                                            <option value="14">实践选修</option>
+                                            <option value="15">社会发展与公民教育</option>
+                                            <option value="16">人文经典与人文修养</option>
+                                            <option value="17">通识选修</option>
+                                            <option value="18">创业教育</option>
+                                            <option value="19">科技发展与科学精神</option>
+                                            <option value="20">心理健康选修</option>
+                                            <option value="21">文明对话与国际视野</option>
+                                            <option value="22">经管任选</option>
+                                            <option value="23">艺术创作与审美体验</option>
+                                            <option value="24">英语必修</option>
+                                            <option value="25">课外必修</option>
+                                            <option value="26">专业限选</option>
+                                            <option value="27">专业任选</option>
+                                            <option value="28">公共必修</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">课程名</label>
+                                        <input class="form-control" type="text" name="Cname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">课程号</label>
+                                        <input class="form-control" type="text" name="Ccode">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">开课学院</label>
+                                        <input class="form-control" type="text" name="Cdept">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">上课时间</label>
+                                        <input class="form-control" type="text" name="Ctime">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">授课老师</label>
+                                        <input class="form-control" type="text" name="Tname">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>课程名称</td>
+                    <td>课程学分</td>
+                    <td>课程性质</td>
+                    <td>任课老师</td>
+                    <td>选课课号</td>
+                    <td>上课时间</td>
+                    <td>上课地点</td>
+                    <td>开课学院</td>
+                    <td>剩余容量</td>
+                    <td>选定</td>
+                </tr>
+                {% for data in courses %}
+                <tr>
+                    <td><a href="{% url 'cas:courseDetail'  Ccode=data.9  %}">{{ data.0 }}</a></td>
+                    <td>{{ data.1 }}</td>
+                    <td>{{ data.2 }}</td>
+                    <td>{{ data.3 }}</td>
+                    <td>{{ data.4 }}</td>
+                    <td>{{ data.5 }}</td>
+                    <td>{{ data.6 }}</td>
+                    <td>{{ data.7 }}</td>
+                    <td>{{ data.8 }}</td>
+                    <td>
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input class="form-check-input" type="checkbox" name="course" value="{{ data.4 }}" />
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+{% if not query %}
+<div class="pagination">
+    <span class="step-links">
+        {% if courses.has_previous %}
+        <!--a href="?page=1">&laquo; 第一页</a>-->
+        <a href="?page={{ courses.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        {% if courses.has_next %}
+        <a href="?page={{ courses.next_page_number }}">下一页</a>
+        <!--<a href="?page={{ courses.paginator.num_pages }}">最后一页 &raquo;</a>-->
+        {% endif %}
+    </span>
+</div>
+
+{% endif %}
+{% endblock %}

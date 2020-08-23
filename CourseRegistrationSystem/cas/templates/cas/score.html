@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if identity.isStudent %}
+        成绩查询
+    {% elif identity.isTeacher %}
+        成绩导入
+    {% else %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="table-responsive">
+    <table class="table" style="margin:5% 10%;width:50%">
+        <tbody>
+            <tr>
+                <td>课程名</td>
+                <td>成绩</td>
+                <td>学分</td>
+                <td>绩点</td>
+                <td>补考成绩</td>
+                <td>重修</td>
+                <td>
+            </tr>
+            {% for d,gpa in data %}
+            <tr>
+                <td>{{ d.0 }}</td>
+                <td>{{ d.1 }}</td>
+                <td>{{ d.2 }}</td>
+                <td>{{ gpa }}</td>
+                {% if d.3 %}
+                    <td>{{ d.3 }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                {% if d.4 %}
+                <td>{{ d.4 }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

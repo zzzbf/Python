@@ -1,0 +1,81 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ssl.google-analytics.com/ga.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% block head %}
+    <script>{{ js }}</script>
+    {% endblock %}
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    {% block top %}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    {% if identity.isStudent  %}
+                    <li><a href="{% url 'cas:home' %}">首页</a></li>
+                    <li><a href="{% url 'cas:course' %}">网上选课</a></li>
+                    <li><a href="{% url 'cas:scoreQuery' %}">成绩查询</a></li>
+                    <li><a href="{% url 'cas:searchInfo' %}">信息查询</a></li>
+                    <li><a href="{% url 'cas:timetable' %}">查看课表</a></li>
+                    {% elif identity.isTeacher %}
+                    <li><a href="{% url 'cas:home' %}">首页</a></li>
+                    <li><a href="{% url 'cas:searchInfo' %}">信息查询</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% if request.user.is_authenticated %}
+
+                    {% if identity.isStudent %}
+                    <li><a href="/logout">欢迎您：{{ name }}同学&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span>退出登录</a></li>
+                    {% elif identity.isTeacher %}
+                    <li><a href="/logout">欢迎您：{{ name }}老师&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span>退出登录</a></li>
+                    {% endif %}
+
+                    {% else %}
+                    <li><a href="/account/login">登录</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
